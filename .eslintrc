@@ -1,0 +1,72 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb-base",
+  "env": {
+    "node": true,
+    "es6": true,
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "globals": {
+    "jWeb3": false,
+    "jWeb3Endpoint": false
+  },
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed",
+      {
+        "requireForBlockBody": true
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1,
+        "MemberExpression": 1,
+        "FunctionDeclaration": {
+          "parameters": "first"
+        },
+        "FunctionExpression": {
+          "parameters": "first"
+        },
+        "CallExpression": {
+          "arguments": "first"
+        },
+        "ArrayExpression": "first",
+        "ObjectExpression": "first"
+      }
+    ],
+    "no-multi-spaces": [
+      "error",
+      {
+        "exceptions": {
+          "Property": true,
+          "VariableDeclarator": true,
+          "ImportDeclaration": true
+        }
+      }
+    ],
+    "max-len": "off",
+    "newline-per-chained-call": "off",
+    "no-console": "warn",
+    "prefer-template": "error",
+    "class-methods-use-this": "warn",
+    "require-yield": "warn",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "arrow-body-style": "off"
+  }
+}
