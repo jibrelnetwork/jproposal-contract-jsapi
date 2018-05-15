@@ -5,7 +5,7 @@
 
 import memoize from '../../utils/memoize'
 
-import supportedContracts from '../../abi'
+import votingInterfaceABI from '../../abi'
 
 /**
  * @function getContractInstance
@@ -15,33 +15,23 @@ import supportedContracts from '../../abi'
  * @param {object} payload - Payload object
  * @param {object} payload.props - API function properties
  * @param {string} payload.props.contractAddress - Contract address
- * @param {string} payload.interfaceName - Interface name
  *
  * @returns {object} Contract instance
  */
 export default function getContractInstance(payload) {
-  const { props, interfaceName } = payload
-  const contractInstance = getContractAt(props.contractAddress, interfaceName)
+  const contractInstance = getContractAt(payload.props.contractAddress)
 
   return { ...payload, contractInstance }
 }
 
-function _getContract(interfaceName) {
-  const contractABI = supportedContracts[interfaceName]
-
-  const isContractInterfaceSupported = (contractABI != null)
-
-  if (!isContractInterfaceSupported) {
-    throw (new Error(`Contract interface ${interfaceName} is not supported`))
-  }
-
-  return jWeb3.eth.contract(contractABI)
+function _getContract() {
+  return jWeb3.eth.contract(votingInterfaceABI)
 }
 
 const getContract = memoize(_getContract)
 
-function _getContractAt(contractAddress, interfaceName) {
-  const contract = getContract(interfaceName)
+function _getContractAt(contractAddress) {
+  const contract = getContract()
 
   return contract.at(contractAddress)
 }
